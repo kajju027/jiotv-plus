@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@Allinone_Reborn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, #121212, #000);
+      color: #fff;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    h1 {
+      text-align: center;
+      margin: 24px;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #ff004f, #7c00ff, #00eaff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    .loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .loader::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #ff004f;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .search-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 0 16px;
+      margin-bottom: 20px;
+    }
+    .search-wrapper input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      font-size: 1rem;
+      background: #1a1a1a;
+      color: white;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0 2px transparent;
+      background-image: linear-gradient(#1a1a1a, #1a1a1a), linear-gradient(270deg, #ff004f, #7c00ff, #00eaff);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      animation: borderPulse 4s infinite linear;
+    }
+    @keyframes borderPulse {
+      0% {
+        background-image: linear-gradient(#1a1a1a, #1a1a1a), linear-gradient(270deg, #ff004f, #7c00ff, #00eaff);
+      }
+      100% {
+        background-image: linear-gradient(#1a1a1a, #1a1a1a), linear-gradient(270deg, #00eaff, #7c00ff, #ff004f);
+      }
+    }
+    .search-wrapper input::placeholder { color: #aaa; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+    @media screen and (max-width: 600px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .card {
+      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(255, 0, 79, 0.5);
+    }
+    .card img {
+      max-width: 100%;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader"></div>
+  <h1>JioTV Web by @Allinone_Reborn</h1>
+  <div class="search-wrapper">
+    <input type="text" id="searchInput" placeholder="Search for a channel..." />
+  </div>
+  <div class="grid" id="channelGrid"></div>
+
+  <script>
+    const _0x8835cf=_0x2a3a;function _0x2c6c(){const _0x8a12ca=['16YdjJxA','getElement','className','.php','stener','4AVMfmJ','name','222488TwmJIT','none','-str/index','OKMyv','fxbaB','stringify','json','rn.fun/jio','appendChil','xkrtk','img','searchInpu','forEach','pEuVh','UzCgm','input','createElem','loader','ById','src','8723979mwJZrd','includes','toLowerCas','addEventLi','4412850RzDgHD','ent','value','3139080wzXYNR','div','setItem','18OPidUN','card','player.htm','logo','display','Hiveo','1784994logGKU','DvmuT','style','filter','then','1126920tljabZ','location','streamConf','textConten','card-title','SZQwI','channelGri','onclick','https://al','448905ZGLlTZ','linonerebo','dcUeF','nHTqJ','innerHTML','href','tiPNC'];_0x2c6c=function(){return _0x8a12ca;};return _0x2c6c();}(function(_0x490702,_0x19c8fa){const _0x1dde7a=_0x2a3a,_0x3dd5cb=_0x490702();while(!![]){try{const _0x1f9fda=parseInt(_0x1dde7a(0x166))/(-0x667+-0xa5+-0x5*-0x169)+-parseInt(_0x1dde7a(0x19d))/(0x8*-0x33+-0x223+-0x1d*-0x21)+parseInt(_0x1dde7a(0x16b))/(0x1423*0x1+-0x19d5+-0x1*-0x5b5)*(-parseInt(_0x1dde7a(0x180))/(0x24b*-0x2+-0x3a6+0x10*0x84))+parseInt(_0x1dde7a(0x174))/(0x88b*0x3+0x87d*-0x1+0x1*-0x111f)*(-parseInt(_0x1dde7a(0x1a0))/(0x1efc+0x1e55+0x4b7*-0xd))+parseInt(_0x1dde7a(0x182))/(-0x1ee1*0x1+-0x10a*0x17+-0x131*-0x2e)*(-parseInt(_0x1dde7a(0x17b))/(0x2432*-0x1+0x134f+0x10eb))+parseInt(_0x1dde7a(0x196))/(-0x26df+-0xf8c+0x19a*0x22)+parseInt(_0x1dde7a(0x19a))/(-0xe*0x1e9+0xd1a+-0xdae*-0x1);if(_0x1f9fda===_0x19c8fa)break;else _0x3dd5cb['push'](_0x3dd5cb['shift']());}catch(_0x2159a3){_0x3dd5cb['push'](_0x3dd5cb['shift']());}}}(_0x2c6c,0x405e6+-0x42f4*0x56+0x207821));let allChannels=[];fetch(_0x8835cf(0x173)+_0x8835cf(0x175)+_0x8835cf(0x189)+_0x8835cf(0x184)+_0x8835cf(0x17e))[_0x8835cf(0x16a)](_0x2b8f52=>_0x2b8f52[_0x8835cf(0x188)]())[_0x8835cf(0x16a)](_0x200993=>{const _0x132008=_0x8835cf,_0x401578={'DvmuT':function(_0x3a56a6,_0x3bb888){return _0x3a56a6(_0x3bb888);},'dcUeF':_0x132008(0x193),'Hiveo':_0x132008(0x183)};allChannels=_0x200993,_0x401578[_0x132008(0x167)](renderChannels,_0x200993),document[_0x132008(0x17c)+_0x132008(0x194)](_0x401578[_0x132008(0x176)])[_0x132008(0x168)][_0x132008(0x164)]=_0x401578[_0x132008(0x165)];});function renderChannels(_0x1e17a7){const _0x230e48=_0x8835cf,_0x42ed15={'xkrtk':_0x230e48(0x16d)+'ig','pEuVh':function(_0x4a9504,_0x28c987){return _0x4a9504(_0x28c987);},'nHTqJ':_0x230e48(0x19e),'UzCgm':_0x230e48(0x1a1),'fxbaB':_0x230e48(0x18c),'SZQwI':_0x230e48(0x16f),'OKMyv':_0x230e48(0x171)+'d'},_0x293b76=document[_0x230e48(0x17c)+_0x230e48(0x194)](_0x42ed15[_0x230e48(0x185)]);_0x293b76[_0x230e48(0x178)]='',_0x1e17a7[_0x230e48(0x18e)](_0x1b26de=>{const _0x526428=_0x230e48,_0x3e0cdf=document[_0x526428(0x192)+_0x526428(0x19b)](_0x42ed15[_0x526428(0x177)]);_0x3e0cdf[_0x526428(0x17d)]=_0x42ed15[_0x526428(0x190)],_0x3e0cdf[_0x526428(0x172)]=()=>{const _0x12225f=_0x526428;localStorage[_0x12225f(0x19f)](_0x42ed15[_0x12225f(0x18b)],JSON[_0x12225f(0x187)](_0x1b26de)),window[_0x12225f(0x16c)][_0x12225f(0x179)]=_0x12225f(0x1a2)+'l?'+_0x42ed15[_0x12225f(0x18f)](encodeURIComponent,_0x1b26de[_0x12225f(0x181)]);};const _0x3556e2=document[_0x526428(0x192)+_0x526428(0x19b)](_0x42ed15[_0x526428(0x186)]);_0x3556e2[_0x526428(0x195)]=_0x1b26de[_0x526428(0x163)];const _0x17a24e=document[_0x526428(0x192)+_0x526428(0x19b)](_0x42ed15[_0x526428(0x177)]);_0x17a24e[_0x526428(0x17d)]=_0x42ed15[_0x526428(0x170)],_0x17a24e[_0x526428(0x16e)+'t']=_0x1b26de[_0x526428(0x181)],_0x3e0cdf[_0x526428(0x18a)+'d'](_0x3556e2),_0x3e0cdf[_0x526428(0x18a)+'d'](_0x17a24e),_0x293b76[_0x526428(0x18a)+'d'](_0x3e0cdf);});}function _0x2a3a(_0xfb2860,_0x20388a){const _0x14f2e5=_0x2c6c();return _0x2a3a=function(_0x815ff7,_0x2df104){_0x815ff7=_0x815ff7-(0x14d3+-0x141d+-0xad*-0x1);let _0x31a41c=_0x14f2e5[_0x815ff7];return _0x31a41c;},_0x2a3a(_0xfb2860,_0x20388a);}document[_0x8835cf(0x17c)+_0x8835cf(0x194)](_0x8835cf(0x18d)+'t')[_0x8835cf(0x199)+_0x8835cf(0x17f)](_0x8835cf(0x191),function(){const _0x46f773=_0x8835cf,_0x52e928={'tiPNC':function(_0x4f8cbd,_0x1678f5){return _0x4f8cbd(_0x1678f5);}},_0x4e60b0=this[_0x46f773(0x19c)][_0x46f773(0x198)+'e'](),_0x742c8c=allChannels[_0x46f773(0x169)](_0x279380=>_0x279380[_0x46f773(0x181)][_0x46f773(0x198)+'e']()[_0x46f773(0x197)](_0x4e60b0));_0x52e928[_0x46f773(0x17a)](renderChannels,_0x742c8c);});
+  </script>
+  <!-- Anti-Adblock Popup -->
+<div class="adb" id="adb" style="display: none;">
+    <div class="adbs">
+        <h3>Adblock Detected</h3>
+        <p>Please disable your adblocker to continue browsing this site.</p>
+    </div>
+</div>
+
+<style>
+.adb {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.adbs {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+.adbs h3 {
+    color: #d00;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.adbs p {
+    font-size: 16px;
+    color: #333;
+}
+</style>
+
+<script>
+function showAdblockPopup() {
+    document.getElementById('adb').style.display = 'flex';
+}
+
+async function detectAdblock() {
+    let detected = false;
+
+    // 1. Bait DIV
+    const bait = document.createElement('div');
+    bait.className = 'ad adsbox ad-banner adsense ad-container sponsored';
+    bait.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;';
+    document.body.appendChild(bait);
+
+    // 2. Bait Image
+    const img = document.createElement('img');
+    img.src = 'https://pagead2.googlesyndication.com/pagead/imgad?id=CAASFeDxyz'; // fake image ad
+    img.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;';
+    img.onerror = () => { detected = true; };
+    document.body.appendChild(img);
+
+    // 3. Bait Iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://googleads.g.doubleclick.net/pagead/html/r2023/sample-ad.html';
+    iframe.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;';
+    iframe.onerror = () => { detected = true; };
+    document.body.appendChild(iframe);
+
+    // 4. Google AdSense Script
+    const script = document.createElement('script');
+    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+    script.async = true;
+    script.onerror = () => { detected = true; };
+    document.head.appendChild(script);
+
+    // Give adblockers time to remove/hide things
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    if (
+        window.getComputedStyle(bait).display === 'none' 
+        bait.offsetHeight === 0 
+        bait.offsetParent === null
+    ) {
+        detected = true;
+    }
+
+    // Cleanup
+    bait.remove();
+    img.remove();
+    iframe.remove();
+    script.remove();
+
+    return detected;
+}
+
+window.addEventListener('load', async () => {
+    const blocked = await detectAdblock();
+    if (blocked) {
+        showAdblockPopup();
+    }
+});
+</script>
+</body>
+</html>
