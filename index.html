@@ -652,6 +652,16 @@ window.addEventListener('DOMContentLoaded', async () => {
 let popup;
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if popup was shown recently
+  const lastPopupTime = localStorage.getItem('lastPopupTime');
+  const now = new Date().getTime();
+  const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+  
+  // If popup was shown less than 30 minutes ago, don't show it again
+  if (lastPopupTime && (now - lastPopupTime < thirtyMinutes)) {
+    return;
+  }
+  
   popup = document.getElementById('accessPopup');
   
   // Show popup after 0.5s
@@ -660,6 +670,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       popup.style.opacity = '1';
       popup.querySelector('div').style.transform = 'translateY(0)';
+      
+      // Store the current time when popup is shown
+      localStorage.setItem('lastPopupTime', now.toString());
     }, 10);
   }, 500);
 
