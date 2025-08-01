@@ -651,13 +651,16 @@ window.addEventListener('DOMContentLoaded', async () => {
 let popup;
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Check if popup was COMPLETED recently (button clicked and countdown finished)
-  const popupCompletedTime = localStorage.getItem('popupCompletedTime');
+  // Get current full URL (including path)
+  const currentUrl = window.location.href.split('?')[0]; // Remove query params if any
+  
+  // Check if popup was COMPLETED recently for this exact URL (button clicked and countdown finished)
+  const popupData = JSON.parse(localStorage.getItem('popupData') || '{}');
   const now = new Date().getTime();
   const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
   
-  // If popup was completed less than 30 minutes ago, don't show it again
-  if (popupCompletedTime && (now - popupCompletedTime < thirtyMinutes)) {
+  // If popup was completed for this exact URL less than 30 minutes ago, don't show it again
+  if (popupData[currentUrl] && (now - popupData[currentUrl] < thirtyMinutes)) {
     return;
   }
   
@@ -707,8 +710,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           popup.style.display = 'none';
           
-          // Mark popup as completed (start cooldown period)
-          localStorage.setItem('popupCompletedTime', now.toString());
+          // Mark popup as completed for this exact URL (start cooldown period)
+          const popupData = JSON.parse(localStorage.getItem('popupData') || '{}');
+          popupData[currentUrl] = now.toString();
+          localStorage.setItem('popupData', JSON.stringify(popupData));
           
           // Remove in-progress flag
           sessionStorage.removeItem('popupInProgress');
