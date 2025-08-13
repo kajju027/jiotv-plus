@@ -606,20 +606,20 @@ window.addEventListener('load', async () => {
 });
 </script>
 <script>
-// Support Us Popup with 1-second countdown, URL redirection, and 30-minute cooldown
+// Support Us Popup with 4-second countdown, URL redirection, and 6-hour cooldown
 document.addEventListener('DOMContentLoaded', function() {
     // Function to get page-specific storage key
     function getPageKey() {
         return 'popupShown_' + window.location.pathname;
     }
 
-    // Check if popup was shown for this page in the last 30 minutes
+    // Check if popup was shown for this page in the last 6 hours
     const pageKey = getPageKey();
     const popupShownTime = localStorage.getItem(pageKey);
     const currentTime = new Date().getTime();
-    const thirtyMinutes = 30 * 60 * 1000;
+    const sixHours = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
-    if (!popupShownTime || (currentTime - popupShownTime) > thirtyMinutes) {
+    if (!popupShownTime || (currentTime - popupShownTime) > sixHours) {
         showPopup();
     }
 
@@ -699,10 +699,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     color: rgba(255,255,255,0.7);
                     display: none;
                     animation: pulse 1s infinite alternate;
-                ">Access granted! Closing in <span id="countdown-number" style="
+                ">Please open the ads page sometime. Closing in <span id="countdown-number" style="
                     color: #00fffc;
                     font-weight: bold;
-                ">1</span> second...</div>
+                ">4</span> seconds...</div>
                 
                 <div style="
                     position: absolute;
@@ -774,18 +774,30 @@ document.addEventListener('DOMContentLoaded', function() {
             // Open the ad URL in new tab
             window.open('https://staunchtownsegg.com/xi7nvp42w?key=c7e203300673013b206701b3857ddf28', '_blank');
             
-            // Show countdown
+            // Show message and countdown
             const countdownEl = document.getElementById('countdown');
             const countdownNumber = document.getElementById('countdown-number');
             countdownEl.style.display = 'block';
             this.style.pointerEvents = 'none';
             
-            // 1-second countdown
-            setTimeout(function() {
-                document.getElementById('popup-overlay').style.animation = 'fadeIn 0.5s ease-out reverse';
-                setTimeout(() => {
-                    document.getElementById('popup-overlay').remove();
-                }, 500);
+            // Change button text
+            this.textContent = 'THANK YOU!';
+            
+            // 4-second countdown
+            let seconds = 4;
+            countdownNumber.textContent = seconds;
+            
+            const countdownInterval = setInterval(function() {
+                seconds--;
+                countdownNumber.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('popup-overlay').style.animation = 'fadeIn 0.5s ease-out reverse';
+                    setTimeout(() => {
+                        document.getElementById('popup-overlay').remove();
+                    }, 500);
+                }
             }, 1000);
         });
     }
