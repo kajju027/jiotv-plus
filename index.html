@@ -606,20 +606,20 @@ window.addEventListener('load', async () => {
 });
 </script>
 <script>
-// Support Us Popup with 4-second countdown, URL redirection, and 6-hour cooldown
+// Support Us Popup with 4-second countdown, URL redirection, and 24-hour cooldown
 document.addEventListener('DOMContentLoaded', function() {
     // Function to get page-specific storage key
     function getPageKey() {
         return 'popupShown_' + window.location.pathname;
     }
 
-    // Check if popup was shown for this page in the last 6 hours
+    // Check if popup was shown for this page in the last 24 hours
     const pageKey = getPageKey();
     const popupShownTime = localStorage.getItem(pageKey);
     const currentTime = new Date().getTime();
-    const sixHours = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
+    const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-    if (!popupShownTime || (currentTime - popupShownTime) > sixHours) {
+    if (!popupShownTime || (currentTime - popupShownTime) > twentyFourHours) {
         showPopup();
     }
 
@@ -772,7 +772,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem(pageKey, currentTime.toString());
             
             // Open the ad URL in new tab
-            window.open('https://staunchtownsegg.com/xi7nvp42w?key=c7e203300673013b206701b3857ddf28', '_blank');
+            window.open('https://staunchtownsegg.com/pd53dd7bc?key=98799ff57df38468670c51fdfa1b46ab', '_blank');
             
             // Show message and countdown
             const countdownEl = document.getElementById('countdown');
