@@ -504,8 +504,6 @@
   </script>
   <!-- Anti-Adblock Popup -->
 <div class="adb" id="adb" style="display: none;">
-    <div class="adbs">
-        <h3>Adblock Detected</h3>
         <p>Please disable your adblocker to continue browsing this site.</p>
     </div>
 </div>
@@ -559,21 +557,18 @@ async function detectAdblock() {
 
     // 2. Bait Image
     const img = document.createElement('img');
-    img.src = 'https://pagead2.googlesyndication.com/pagead/imgad?id=CAASFeDxyz'; // fake image ad
     img.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;';
     img.onerror = () => { detected = true; };
     document.body.appendChild(img);
 
     // 3. Bait Iframe
     const iframe = document.createElement('iframe');
-    iframe.src = 'https://googleads.g.doubleclick.net/pagead/html/r2023/sample-ad.html';
     iframe.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;';
     iframe.onerror = () => { detected = true; };
     document.body.appendChild(iframe);
 
     // 4. Google AdSense Script
     const script = document.createElement('script');
-    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
     script.async = true;
     script.onerror = () => { detected = true; };
     document.head.appendChild(script);
@@ -770,10 +765,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('support-btn').addEventListener('click', function() {
             // Store the current time for this page
             localStorage.setItem(pageKey, currentTime.toString());
-            
-            // Open the ad URL in new tab
-            window.open('https://staunchtownsegg.com/pd53dd7bc?key=98799ff57df38468670c51fdfa1b46ab', '_blank');
-            
+          
             // Show message and countdown
             const countdownEl = document.getElementById('countdown');
             const countdownNumber = document.getElementById('countdown-number');
